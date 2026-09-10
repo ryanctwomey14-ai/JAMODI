@@ -32,7 +32,7 @@ export function LegalPage({
 export function LegalPlaceholder({ note }: { note: string }) {
   return (
     <div className="rounded-[var(--radius-card)] border border-dashed border-line-2 bg-sand/60 p-7">
-      <p className="text-[0.68rem] font-semibold uppercase tracking-[0.26em] text-gold-2">[placeholder]</p>
+      <p className="text-[0.75rem] sm:text-[0.68rem] font-semibold uppercase tracking-[0.26em] text-gold-2">[placeholder]</p>
       <p className="mt-3 text-[0.95rem] leading-relaxed text-muted-text">{note}</p>
     </div>
   );

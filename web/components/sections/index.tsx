@@ -36,7 +36,7 @@ export function Placeholder({
     <span
       className={
         "inline-block max-w-full truncate rounded-[3px] bg-gold-soft align-middle font-semibold leading-normal tracking-tight text-gold-2 " +
-        (size === "sm" ? "px-1 py-px text-[0.62rem]" : "px-1.5 py-0.5 text-[0.8em]")
+        (size === "sm" ? "px-1 py-px text-[0.75rem] sm:text-[0.62rem]" : "px-1.5 py-0.5 text-[0.8em]")
       }
     >
       [placeholder]
@@ -137,7 +137,7 @@ export function Comparison() {
               <tr>
                 <th
                   scope="col"
-                  className="w-[15%] border-b border-line-2 pb-4 pr-6 text-[0.63rem] font-semibold uppercase tracking-[0.22em] text-faint"
+                  className="w-[15%] border-b border-line-2 pb-4 pr-6 text-[0.75rem] sm:text-[0.63rem] font-semibold uppercase tracking-[0.22em] text-faint"
                 >
                   Vector
                 </th>
@@ -148,7 +148,7 @@ export function Comparison() {
                       key={c}
                       scope="col"
                       className={
-                        "w-[28%] pb-4 text-[0.63rem] font-semibold uppercase tracking-[0.22em] " +
+                        "w-[28%] pb-4 text-[0.75rem] sm:text-[0.63rem] font-semibold uppercase tracking-[0.22em] " +
                         (ours
                           ? "rounded-t-[var(--radius-frame)] bg-navy px-6 pt-6 text-gold"
                           : "border-b border-line-2 pr-6 text-faint")
@@ -210,7 +210,7 @@ export function Comparison() {
                     >
                       <dt
                         className={
-                          "text-[0.6rem] font-semibold uppercase tracking-[0.2em] " +
+                          "text-[0.75rem] sm:text-[0.6rem] font-semibold uppercase tracking-[0.2em] " +
                           (ours ? "text-gold" : "text-faint")
                         }
                       >
@@ -358,7 +358,7 @@ export function FounderBio({ head }: { head?: { title: string; lede?: string } }
             </div>
             <div className="mt-6 flex flex-wrap items-baseline justify-between gap-3 border-t border-line pt-5">
               <p className="text-[1.3rem] text-navy">{founder.name}</p>
-              <p className="text-[0.64rem] font-medium uppercase tracking-[0.24em] text-muted-text">
+              <p className="text-[0.75rem] sm:text-[0.64rem] font-medium uppercase tracking-[0.24em] text-muted-text">
                 <Placeholder size="sm">{founder.role}</Placeholder>
               </p>
             </div>

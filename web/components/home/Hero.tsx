@@ -6,6 +6,7 @@ import { Img as Image } from "@/components/ui/Img";
 import { hero } from "@/content/fund";
 import { Shell } from "@/components/ui/Kit";
 import { asset } from "@/lib/basePath";
+import { useHeavyMediaOk } from "@/lib/useHeavyMediaOk";
 
 /* ============================================================================
  * HOME — HERO
@@ -29,11 +30,14 @@ import { asset } from "@/lib/basePath";
  *  · Under prefers-reduced-motion the video is not rendered at all — the poster
  *    frame is shown instead. Auto-playing footage is precisely what that
  *    setting exists to stop.
+ *  · Phones and Save-Data clients get the poster too. The clip is ~1.9MB of
+ *    decorative scenery, which is not a fair thing to spend of someone's
+ *    cellular allowance to put texture behind a headline. See useHeavyMediaOk.
  *  · A poster frame paints immediately, so the band is never empty.
  * ========================================================================== */
 
 const EASE = [0.23, 1, 0.32, 1] as const;
-const POSTER = asset("/video/hero-poster.jpg");
+const POSTER = "/video/hero-poster.jpg";
 
 function Sub({ text }: { text: string }) {
   // The geography inside the sentence is unconfirmed; mark just that word.
@@ -52,6 +56,10 @@ function Sub({ text }: { text: string }) {
 
 export function Hero() {
   const reduce = useReducedMotion();
+  const heavyOk = useHeavyMediaOk();
+
+  // Video only where it is worth the bytes and not unwelcome.
+  const showVideo = heavyOk && !reduce;
 
   const parent = { hidden: {}, shown: { transition: { staggerChildren: 0.07, delayChildren: 0.06 } } };
   const child = {
@@ -62,7 +70,7 @@ export function Hero() {
   return (
     <section className="relative isolate flex min-h-[540px] flex-col overflow-hidden bg-navy lg:min-h-[620px]">
       {/* ---------- footage ---------- */}
-      {reduce ? (
+      {!showVideo ? (
         <Image
           src={POSTER}
           alt=""
@@ -79,7 +87,7 @@ export function Hero() {
           loop
           playsInline
           preload="metadata"
-          poster={POSTER}
+          poster={asset(POSTER)}
           aria-hidden="true"
           tabIndex={-1}
         >

@@ -43,7 +43,7 @@ export function Footer() {
             {!isPlaceholder(firm.email) && (
               <a
                 href={"mailto:" + firm.email}
-                className="mt-5 inline-block text-[0.94rem] font-medium text-gold-2 underline-offset-4 hover:underline"
+                className="touch-link mt-5 inline-block text-[0.94rem] font-medium text-gold-2 underline-offset-4 hover:underline"
               >
                 {firm.email}
               </a>
@@ -52,10 +52,10 @@ export function Footer() {
 
           {footerNav.map((col) => (
             <nav key={col.heading} aria-label={col.heading}>
-              <h2 className="text-[0.63rem] font-semibold uppercase tracking-[0.26em] text-faint">
+              <h2 className="text-[0.75rem] font-semibold uppercase tracking-[0.26em] text-faint sm:text-[0.63rem]">
                 {col.heading}
               </h2>
-              <ul className="mt-6 space-y-3">
+              <ul className="touch-list mt-6 space-y-3">
                 {col.links.map((l) => (
                   <li key={l.label}>
                     {"external" in l && l.external ? (
@@ -63,22 +63,22 @@ export function Footer() {
                         href={l.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-start gap-1 text-[0.93rem] text-muted-text transition-colors duration-200 hover:text-navy"
+                        className="touch-link inline-flex items-start gap-1 text-[0.93rem] text-muted-text transition-colors duration-200 hover:text-navy"
                       >
                         {l.label}
-                        <ArrowUpRight size={12} strokeWidth={1.8} className="mt-1" aria-hidden />
+                        <ArrowUpRight size={12} strokeWidth={1.8} className="mt-1 shrink-0" aria-hidden />
                       </a>
                     ) : l.href.startsWith("/") ? (
                       <Link
                         href={l.href}
-                        className="text-[0.93rem] text-muted-text transition-colors duration-200 hover:text-navy"
+                        className="touch-link text-[0.93rem] text-muted-text transition-colors duration-200 hover:text-navy"
                       >
                         {l.label}
                       </Link>
                     ) : (
                       <a
                         href={l.href}
-                        className="text-[0.93rem] text-muted-text transition-colors duration-200 hover:text-navy"
+                        className="touch-link text-[0.93rem] text-muted-text transition-colors duration-200 hover:text-navy"
                       >
                         {l.label}
                       </a>
@@ -92,7 +92,7 @@ export function Footer() {
 
         {/* ---- disclosures ---- */}
         <div className="mt-14 border-t border-line-2 pt-8">
-          <h2 className="text-[0.63rem] font-semibold uppercase tracking-[0.26em] text-faint">
+          <h2 className="text-[0.75rem] font-semibold uppercase tracking-[0.26em] text-faint sm:text-[0.63rem]">
             Important disclosures
           </h2>
           <div className="mt-5 max-w-[108ch] space-y-3">

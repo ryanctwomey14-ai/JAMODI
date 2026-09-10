@@ -114,7 +114,7 @@ export function ReturnsCalculator() {
                 <div className="flex items-baseline justify-between gap-4">
                   <label
                     htmlFor="calc-amount"
-                    className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-muted-text"
+                    className="text-[0.75rem] sm:text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-muted-text"
                   >
                     Investment amount
                   </label>
@@ -133,10 +133,10 @@ export function ReturnsCalculator() {
                   step={STEP}
                   value={amount}
                   onChange={(e) => setAmount(Number(e.target.value))}
-                  style={{ background: track(pct(amount, MIN, MAX)) }}
-                  className="calc-range mt-5"
+                  style={{ "--track": track(pct(amount, MIN, MAX)) } as React.CSSProperties}
+                  className="calc-range mt-2"
                 />
-                <div className="mt-2.5 flex justify-between text-[0.72rem] text-faint">
+                <div className="flex justify-between text-[0.78rem] text-faint">
                   <span className="num">{money(MIN)}</span>
                   <span className="num">{money(MAX)}</span>
                 </div>
@@ -146,7 +146,7 @@ export function ReturnsCalculator() {
                 <div className="flex items-baseline justify-between gap-4">
                   <label
                     htmlFor="calc-years"
-                    className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-muted-text"
+                    className="text-[0.75rem] sm:text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-muted-text"
                   >
                     Hold period
                   </label>
@@ -165,10 +165,10 @@ export function ReturnsCalculator() {
                   step={1}
                   value={years}
                   onChange={(e) => setYears(Number(e.target.value))}
-                  style={{ background: track(pct(years, 3, 7)) }}
-                  className="calc-range mt-5"
+                  style={{ "--track": track(pct(years, 3, 7)) } as React.CSSProperties}
+                  className="calc-range mt-2"
                 />
-                <div className="mt-2.5 flex justify-between text-[0.72rem] text-faint">
+                <div className="flex justify-between text-[0.78rem] text-faint">
                   <span>3 years</span>
                   <span>7 years</span>
                 </div>
@@ -188,7 +188,7 @@ export function ReturnsCalculator() {
 
             {/* ---------------- results ---------------- */}
             <div className="rounded-[var(--radius-card)] bg-navy p-7 text-onnavy sm:p-9">
-              <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-gold">
+              <p className="text-[0.75rem] sm:text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-gold">
                 Projected over {years} years
               </p>
 
@@ -217,7 +217,7 @@ export function ReturnsCalculator() {
 
               {/* composition of the high case */}
               <div className="mt-9 border-t border-white/15 pt-7">
-                <p className="text-[0.72rem] text-onnavy/60">
+                <p className="text-[0.75rem] sm:text-[0.72rem] text-onnavy/60">
                   Where the upper-case total comes from
                 </p>
                 <div
@@ -282,7 +282,7 @@ function Figure({
       >
         {value}
       </dd>
-      {note && <p className="mt-1.5 text-[0.74rem] leading-snug text-onnavy/45">{note}</p>}
+      {note && <p className="mt-1.5 text-[0.75rem] sm:text-[0.74rem] leading-snug text-onnavy/45">{note}</p>}
     </div>
   );
 }

@@ -49,7 +49,7 @@ export function Header() {
         }
       >
         <div className="mx-auto flex min-h-[84px] w-full max-w-[1280px] items-center gap-6 px-5 sm:px-8 lg:px-10">
-          <Link href="/" className="flex flex-none items-center gap-3" aria-label={firm.name + " home"}>
+          <Link href="/" className="flex min-h-[44px] flex-none items-center gap-3" aria-label={firm.name + " home"}>
             <Image
               src="/brand/jamodi-mark.png"
               alt=""
@@ -60,7 +60,7 @@ export function Header() {
             />
             <span className="hidden text-[0.85rem] font-extrabold uppercase leading-none tracking-[0.14em] text-navy sm:block">
               JAMODI
-              <span className="mt-1.5 block text-[0.52rem] font-light uppercase tracking-[0.46em] text-gold-2">
+              <span className="mt-1.5 block text-[0.58rem] font-light uppercase tracking-[0.4em] text-gold-2">
                 Partners
               </span>
             </span>

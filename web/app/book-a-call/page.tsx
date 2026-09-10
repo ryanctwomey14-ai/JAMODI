@@ -59,7 +59,7 @@ export default function BookACallPage() {
                   className="h-14 w-14 flex-none rounded-full object-cover"
                 />
                 <div>
-                  <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-gold-2">
+                  <p className="text-[0.75rem] sm:text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-gold-2">
                     You will speak with
                   </p>
                   <p className="mt-1.5 text-[1.05rem] font-semibold text-navy">{founder.name}</p>

@@ -45,7 +45,7 @@ function FieldError({ id, children }: { id: string; children: ReactNode }) {
 }
 
 const labelCls =
-  "text-[0.65rem] font-semibold uppercase tracking-[0.24em] text-muted-text";
+  "text-[0.75rem] sm:text-[0.65rem] font-semibold uppercase tracking-[0.24em] text-muted-text";
 const controlCls =
   "w-full rounded-[10px] border bg-canvas px-4 py-3 text-ink transition-colors duration-200 placeholder:text-faint focus:outline-none";
 
@@ -236,7 +236,7 @@ export function BookCallForm() {
             <input
               type="checkbox"
               name="consent"
-              className="mt-1 h-[18px] w-[18px] flex-none accent-navy"
+              className="mt-0.5 h-6 w-6 flex-none accent-navy"
               aria-invalid={!!errors.consent}
             />
             <span>
