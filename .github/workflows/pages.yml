@@ -1,0 +1,64 @@
+# Client-review deployment.
+# -----------------------------------------------------------------------------
+# Builds the Next app as a static export and publishes it to GitHub Pages at
+# https://ryanctwomey14-ai.github.io/JAMODI/
+#
+# This is a REVIEW site, not production. The build sets robots noindex (see
+# app/layout.tsx) so it cannot compete with the real domain or surface
+# unreviewed offering language in search results.
+name: Deploy review site to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never let two deploys race; let a newer push finish rather than cancelling it.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - run: npm ci
+
+      - name: Build static export
+        env:
+          GITHUB_PAGES: "true"
+          NEXT_PUBLIC_BASE_PATH: /JAMODI
+          NEXT_PUBLIC_SITE_URL: https://ryanctwomey14-ai.github.io/JAMODI
+        run: npm run build
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: web/out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

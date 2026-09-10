@@ -1,0 +1,527 @@
+@import "tailwindcss";
+
+/* ============================================================================
+   JAMODI PARTNERS — DESIGN SYSTEM
+   ----------------------------------------------------------------------------
+   Direction: light institutional, private-capital register.
+
+   Warm white ground, navy as the structural colour, and rose gold — taken from
+   the mark — as the single accent.
+
+   ONE TYPEFACE THROUGHOUT, taken from the logo: Montserrat, the closest widely
+   available match to the geometric sans in the JAMODI lockup. Headlines run at
+   700–800 with tight tracking, echoing the wordmark; labels run at 500 with
+   very wide tracking, echoing the "PARTNERS" line beneath it. Nothing on the
+   page is set in a face the logo does not use.
+
+   Restraint is the luxury cue here, not ornament: one accent colour, one dark
+   block per page at most, quiet hairlines, and a great deal of air.
+   ========================================================================== */
+@theme {
+  /* ---- ground ---- */
+  --color-canvas: #fcfbf9;
+  --color-paper: #ffffff;
+  --color-sand: #f5f1ea;
+  --color-sand-2: #ebe5da;
+
+  /* ---- structure ---- */
+  /* near-black, for the closing panel only */
+  --color-obsidian: #070c15;
+  --color-navy: #0f1d33;
+  --color-navy-2: #182b4a;
+  --color-navy-3: #2a4068;
+
+  /* ---- brand accent, sampled from the mark ---- */
+  --color-gold: #bd8360;
+  --color-gold-2: #9c6543;
+  --color-gold-soft: #f4e7dc;
+
+  /* ---- text ---- */
+  --color-ink: #10182a; /* 16.1:1 on canvas */
+  --color-muted-text: #55637a; /* 6.6:1 on canvas — body copy */
+  --color-faint: #7a889c; /* 4.7:1 — fine print and rules */
+  --color-line: #eae4da;
+  --color-line-2: #dbd3c6;
+
+  /* ---- on navy ---- */
+  --color-onnavy: #f4f2ee;
+  --color-onnavy-muted: #a6b4ca; /* 8.1:1 on navy */
+
+  /* ---- type ---- */
+  /* All three roles resolve to the same family. They stay as separate tokens so
+     a future brand change can split them again without touching components. */
+  --font-display: var(--font-montserrat), "Helvetica Neue", Arial, sans-serif;
+  --font-sans: var(--font-montserrat), "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-montserrat), "Helvetica Neue", Arial, sans-serif;
+
+  /* ---- radius: tighter than the modern-app default. A small radius reads
+         editorial and considered; a large one reads friendly and generic. ---- */
+  --radius-card: 12px;
+  --radius-frame: 16px;
+  --radius-control: 8px;
+
+  /* ---- elevation: very soft, very wide, navy-tinted. Never grey. ---- */
+  --shadow-card: 0 1px 2px rgb(15 29 51 / 0.03), 0 14px 40px -22px rgb(15 29 51 / 0.18);
+  --shadow-lift: 0 2px 5px rgb(15 29 51 / 0.05), 0 30px 60px -28px rgb(15 29 51 / 0.3);
+  --shadow-float: 0 40px 90px -34px rgb(15 29 51 / 0.42);
+
+  /* ---- rhythm ---- */
+  --section-y: clamp(76px, 9vw, 148px);
+
+  /* ---- motion ---- */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+
+  /* --------------------------------------------------------------------
+     shadcn/ui semantic tokens.
+
+     Mapped onto the JAMODI palette rather than shadcn's slate defaults, so
+     any component added with `npx shadcn@latest add ...` inherits the brand
+     automatically instead of arriving in stock grey. Add new shadcn
+     components freely — they will look like they belong.
+     -------------------------------------------------------------------- */
+  --color-background: var(--color-canvas);
+  --color-foreground: var(--color-ink);
+
+  --color-card: var(--color-paper);
+  --color-card-foreground: var(--color-ink);
+  --color-popover: var(--color-paper);
+  --color-popover-foreground: var(--color-ink);
+
+  --color-primary: var(--color-navy);
+  --color-primary-foreground: var(--color-onnavy);
+  --color-secondary: var(--color-sand);
+  --color-secondary-foreground: var(--color-navy);
+
+  --color-muted: var(--color-sand);
+  --color-muted-foreground: var(--color-muted-text);
+  --color-accent: var(--color-gold-soft);
+  --color-accent-foreground: var(--color-gold-2);
+
+  /* The palette had no red — this is a desaturated brick that sits with the
+     rose gold rather than fighting it. */
+  --color-destructive: #a2402f;
+  --color-destructive-foreground: #ffffff;
+
+  --color-border: var(--color-line);
+  --color-input: var(--color-line-2);
+  --color-ring: var(--color-gold-2);
+}
+
+/* ============================================================================
+   BASE
+   ========================================================================== */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6.5rem;
+    -webkit-text-size-adjust: 100%;
+    overflow-x: clip;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.75;
+    letter-spacing: -0.003em;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Headline register mirrors the wordmark: heavy, tightly tracked, set close.
+     Montserrat needs negative tracking at display sizes or it reads loose. */
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.06;
+    letter-spacing: -0.032em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  h1 { font-weight: 800; letter-spacing: -0.038em; }
+  h4 {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  /* Tailwind v4 defaults a bare `border` utility to currentColor. shadcn
+     components rely on it resolving to --border, so restore that here.
+     Verified safe: nothing in this codebase used a bare `border` utility. */
+  * { border-color: var(--color-border); }
+
+  ::selection { background-color: var(--color-gold-soft); color: var(--color-navy); }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold-2);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  * { scrollbar-color: var(--color-line-2) transparent; scrollbar-width: thin; }
+  ::-webkit-scrollbar { width: 11px; height: 11px; }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-line-2);
+    border: 3px solid var(--color-canvas);
+    border-radius: 99px;
+  }
+}
+
+/* ============================================================================
+   COMPONENT PRIMITIVES
+   Flat single-class selectors, so section padding can never be cancelled by a
+   competing rule.
+   ========================================================================== */
+@layer components {
+  .section { padding-block: var(--section-y); }
+
+  /* ---- section label ---- */
+  /* Echoes the "PARTNERS" line in the lockup: light, uppercase, widely tracked. */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.85rem;
+    font-family: var(--font-display);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--color-gold-2);
+  }
+  .eyebrow::before {
+    content: "";
+    width: 26px;
+    height: 1px;
+    flex: none;
+    background: var(--color-gold);
+  }
+  .eyebrow-onnavy { color: var(--color-gold); }
+
+  /* ---- tabular figures wherever money appears ---- */
+  .num {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+    letter-spacing: -0.025em;
+  }
+
+  /* ---- buttons: rectangular and generously padded rather than pill-shaped.
+         A pill reads consumer-app; this reads private bank. ---- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 52px;
+    padding: 0.9rem 1.7rem;
+    border-radius: var(--radius-control);
+    border: 1px solid transparent;
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    cursor: pointer;
+    white-space: nowrap;
+    text-align: center;
+    transition:
+      background-color 220ms var(--ease-out),
+      border-color 220ms var(--ease-out),
+      color 220ms var(--ease-out),
+      box-shadow 220ms var(--ease-out),
+      transform 150ms var(--ease-out);
+  }
+  .btn:active { transform: scale(0.985); }
+
+  .btn-primary { background: var(--color-navy); color: var(--color-onnavy); }
+  .btn-secondary { background: transparent; color: var(--color-navy); border-color: var(--color-line-2); }
+  .btn-onnavy { background: var(--color-paper); color: var(--color-navy); }
+  .btn-ghost-navy { border-color: rgb(255 255 255 / 0.26); color: var(--color-onnavy); }
+
+  @media (hover: hover) and (pointer: fine) {
+    .btn-primary:hover { background: var(--color-navy-2); box-shadow: var(--shadow-lift); }
+    .btn-secondary:hover { border-color: var(--color-navy); background: var(--color-paper); }
+    .btn-onnavy:hover { background: var(--color-sand); }
+    .btn-ghost-navy:hover { border-color: var(--color-paper); background: rgb(255 255 255 / 0.07); }
+  }
+
+  /* ---- cards: hairline first, shadow only where it earns lift ---- */
+  .card {
+    background: var(--color-paper);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+  }
+  .card-raised { box-shadow: var(--shadow-card); }
+
+  /* ---- framed imagery -----------------------------------------------------
+     Property imagery is graded rather than shown raw: a warm wash lifts it
+     toward the page and a navy tint at the base keeps overlaid text legible.
+     Remove `.plate-grade` once real photography is dropped in. */
+  .plate {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-frame);
+    background: var(--color-sand-2);
+  }
+  .plate-grade::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(to top, rgb(15 29 51 / 0.76) 0%, rgb(15 29 51 / 0.28) 30%, rgb(15 29 51 / 0.03) 58%, transparent 76%),
+      linear-gradient(to bottom, rgb(252 251 249 / 0.2), transparent 36%);
+  }
+
+  /* ---- figures ---- */
+  .stat-value {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---- dark metric tile ------------------------------------------------
+     Used for the target-returns figures. Dark on the light page so the numbers
+     read as the one thing to look at in that section.
+
+     Hover gate: this sits in the "seen often" tier, so the motion is kept
+     small and quick — a 4px lift and a 3px nudge on the arrow, which travels
+     along the diagonal it already points down. Colour and shadow carry most of
+     the feedback; the movement is the garnish, which is why reduced motion
+     keeps the former and drops the latter. */
+  .metric-tile {
+    background: var(--color-navy);
+    border: 1px solid rgb(255 255 255 / 0.1);
+    border-radius: var(--radius-card);
+    transition:
+      transform 220ms var(--ease-out),
+      background-color 220ms var(--ease-out),
+      border-color 220ms var(--ease-out),
+      box-shadow 220ms var(--ease-out);
+  }
+  .metric-tile__icon {
+    transition:
+      transform 220ms var(--ease-out),
+      color 220ms var(--ease-out);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .metric-tile:hover {
+      transform: translateY(-4px);
+      background-color: var(--color-navy-2);
+      border-color: rgb(255 255 255 / 0.22);
+      box-shadow: var(--shadow-lift);
+    }
+    /* the arrow moves the way it points */
+    .metric-tile:hover .metric-tile__icon--up {
+      transform: translate(3px, -3px);
+    }
+    .metric-tile:hover .metric-tile__icon {
+      color: var(--color-gold-soft);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .metric-tile:hover,
+    .metric-tile:hover .metric-tile__icon--up {
+      transform: none;
+    }
+  }
+
+  /* ---- closing panel glow -----------------------------------------------
+     Two stacked radials: a wide falloff under a tighter core. Hovering the
+     panel lifts them, and because they travel different distances and scale
+     from the bottom edge it reads as light blooming upward rather than a
+     shape sliding up.
+
+     800ms is deliberate — this is atmosphere, not a control, so the sub-300ms
+     UI budget does not apply. transform only, pointer-gated, and motionless
+     under prefers-reduced-motion.
+
+     Written here rather than as Tailwind variants: the class needed is
+     `motion-safe:[@media(hover:hover)...]:group-hover:scale-...`, and building
+     that by string concatenation means the literal never appears in source for
+     Tailwind to compile. Plain CSS is both shorter and actually works. */
+  .cta-panel { position: relative; isolation: isolate; overflow: hidden; }
+
+  .cta-glow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    transform-origin: bottom center;
+    transition: transform 800ms var(--ease-out);
+    will-change: transform;
+  }
+  .cta-glow--wide {
+    background: radial-gradient(
+      72% 92% at 50% 118%,
+      color-mix(in oklab, var(--color-gold) 44%, transparent) 0%,
+      transparent 68%
+    );
+  }
+  .cta-glow--core {
+    background: radial-gradient(
+      40% 54% at 50% 112%,
+      color-mix(in oklab, var(--color-gold) 58%, transparent) 0%,
+      transparent 62%
+    );
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .cta-panel:hover .cta-glow--wide { transform: translateY(-22px) scale(1.12); }
+    .cta-panel:hover .cta-glow--core { transform: translateY(-44px) scale(1.26); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cta-glow { transition: none; }
+    .cta-panel:hover .cta-glow--wide,
+    .cta-panel:hover .cta-glow--core { transform: none; }
+  }
+
+  /* ---- calculator sliders -----------------------------------------------
+     The track colour is set inline from the current value so the filled
+     portion follows the thumb; only the thumb itself needs styling here.
+     Both vendor pseudo-elements are required — a browser drops the whole
+     rule if it does not recognise the selector, so they cannot be grouped. */
+  .calc-range {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 999px;
+    cursor: pointer;
+    outline-offset: 6px;
+  }
+  .calc-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 26px;
+    height: 26px;
+    border-radius: 999px;
+    background: var(--color-navy);
+    border: 3px solid var(--color-paper);
+    box-shadow: var(--shadow-card);
+    cursor: grab;
+    transition: transform 160ms var(--ease-out);
+  }
+  .calc-range::-moz-range-thumb {
+    width: 26px;
+    height: 26px;
+    border-radius: 999px;
+    background: var(--color-navy);
+    border: 3px solid var(--color-paper);
+    box-shadow: var(--shadow-card);
+    cursor: grab;
+    transition: transform 160ms var(--ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .calc-range:hover::-webkit-slider-thumb { transform: scale(1.12); }
+    .calc-range:hover::-moz-range-thumb { transform: scale(1.12); }
+  }
+  .calc-range:active::-webkit-slider-thumb { cursor: grabbing; }
+  .calc-range:active::-moz-range-thumb { cursor: grabbing; }
+  @media (prefers-reduced-motion: reduce) {
+    .calc-range::-webkit-slider-thumb { transition: none; }
+    .calc-range::-moz-range-thumb { transition: none; }
+  }
+
+  /* ---- process step card ------------------------------------------------
+     Same hover grammar as the metric tiles so the two dark surfaces on this
+     site behave identically: a small lift, a warmer ground, a brighter
+     hairline. Colour carries the feedback, the movement is garnish, which is
+     why reduced motion keeps the first and drops the second. */
+  .step-card {
+    background: rgb(255 255 255 / 0.03);
+    border: 1px solid rgb(255 255 255 / 0.1);
+    border-radius: var(--radius-card);
+    transition:
+      transform 240ms var(--ease-out),
+      background-color 240ms var(--ease-out),
+      border-color 240ms var(--ease-out),
+      box-shadow 240ms var(--ease-out);
+  }
+  .step-card__rule {
+    transition: border-color 240ms var(--ease-out);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .step-card:hover {
+      transform: translateY(-5px);
+      background-color: rgb(255 255 255 / 0.06);
+      border-color: color-mix(in oklab, var(--color-gold) 45%, transparent);
+      box-shadow: 0 26px 50px -26px rgb(0 0 0 / 0.65);
+    }
+    .step-card:hover .step-card__rule {
+      border-color: color-mix(in oklab, var(--color-gold) 40%, transparent);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .step-card:hover { transform: none; }
+  }
+
+  /* ---- small tag ---- */
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 0.85rem;
+    border-radius: 6px;
+    border: 1px solid var(--color-line-2);
+    background: var(--color-paper);
+    font-family: var(--font-display);
+    font-size: 0.63rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-muted-text);
+    white-space: nowrap;
+  }
+  .tag-gold { border-color: transparent; background: var(--color-gold); color: #fff; }
+  .tag-navy { border-color: transparent; background: var(--color-navy); color: var(--color-onnavy); }
+  .tag-glass {
+    border-color: rgb(255 255 255 / 0.38);
+    background: rgb(255 255 255 / 0.14);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #fff;
+  }
+
+  /* ---- floating panel over imagery ---- */
+  .glass-card {
+    background: rgb(255 255 255 / 0.92);
+    backdrop-filter: blur(22px) saturate(1.25);
+    -webkit-backdrop-filter: blur(22px) saturate(1.25);
+    border: 1px solid rgb(255 255 255 / 0.7);
+    box-shadow: var(--shadow-float);
+  }
+  @supports not (backdrop-filter: blur(1px)) {
+    .glass-card { background: rgb(255 255 255 / 0.985); }
+  }
+
+  /* ---- prose for long-form interior pages ---- */
+  .lede {
+    font-size: clamp(1.02rem, 1.4vw, 1.18rem);
+    line-height: 1.68;
+    color: var(--color-muted-text);
+    text-wrap: pretty;
+  }
+}
+
+/* ============================================================================
+   MOTION — transform/opacity only; every one has a reduced-motion variant.
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .btn:active { transform: none; }
+}
+
+@media print {
+  body { background: #fff; }
+  .no-print { display: none !important; }
+}
